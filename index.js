@@ -1,4 +1,5 @@
 import { createCharacterCard } from "./components/card/card.js";
+import { prevPage, nextPage } from "./components/nav-button/nav-button.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBarContainer = document.querySelector(
@@ -11,19 +12,21 @@ const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
 // States
-const maxPage = 1;
-const page = 1;
+let maxPage;
+let page;
 const searchQuery = "";
-const BASE_URL = "https://rickandmortyapi.com/api/character/";
+let BASE_URL = "https://rickandmortyapi.com/api/character/";
 async function fetchCharacters() {
   try {
-    const response = await fetch(BASE_URL);
+    const query = `?page=${page}`;
+    const response = await fetch(BASE_URL + query);
     if (!response.ok) {
       console.error("errorTrigger");
       return;
     }
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
+    maxPage = data.info.pages;
     const objects = data.results;
     cardContainer.innerHTML = "";
 
@@ -35,4 +38,13 @@ async function fetchCharacters() {
     console.error(error);
   }
 }
-await fetchCharacters();
+
+prevButton.addEventListener("click", async () => {
+  prevPage(page, maxPage);
+  await fetchCharacters(page);
+});
+
+nextButton.addEventListener("click", async () => {
+  nextPage(page, maxPage);
+  await fetchCharacters(page);
+});
