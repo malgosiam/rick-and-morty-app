@@ -24,12 +24,3 @@ export function createSearchBar(onSubmit) {
 
   return form;
 }
-
-/*function submit(event, query) {
-  event.preventDefault();
-
-  const formData = new FormData(event.target);
-  const data = Object.fromEntries(formData);
-  query = data.query;
-  fetchCharacters();
-}*/

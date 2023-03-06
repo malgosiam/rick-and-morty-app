@@ -7,6 +7,7 @@ export function createButton(onClick, style, text) {
   return button;
 }
 
+// Turn page functions
 export function nextPage(page, maxPage) {
   if (page === maxPage) {
     page = 1;
@@ -15,7 +16,6 @@ export function nextPage(page, maxPage) {
   page += 1;
   return page;
 }
-
 export function prevPage(page, maxPage) {
   if (page === 1) {
     page = maxPage;
