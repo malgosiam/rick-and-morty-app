@@ -39,11 +39,13 @@ async function fetchCharacters() {
 
 prevButton.addEventListener("click", async () => {
   page = prevPage(page, maxPage);
+  pagination.textContent = `${page} / ${maxPage}`;
   await fetchCharacters();
 });
 
 nextButton.addEventListener("click", async () => {
   page = nextPage(page, maxPage);
+  pagination.textContent = `${page} / ${maxPage}`;
   await fetchCharacters();
 });
 
